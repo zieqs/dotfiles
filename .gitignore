@@ -1,0 +1,11 @@
+/.config/Electron/
+/.config/OpenRGB/
+/.config/dconf/
+/.config/pulse/
+/.config/gtk-3.0/bookmarks
+/.config/gtk-4.0/bookmarks
+/.config/hyprland-preview-share-picker/
+/.config/github-copilot/
+/.config/go/
+/.config/ibus/
+/.config/fcitx5/conf/cached_layouts
