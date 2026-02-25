@@ -1,32 +1,87 @@
+# --- Global Settings ---
+# Move to a new line for each command to keep it clean in Ghostty
 add_newline = true
-command_timeout = 200
-format = "[$directory$git_branch$git_status]($style)$character"
 
-[character]
-error_symbol = "[✗](bold cyan)"
-success_symbol = "[❯](bold cyan)"
+# The order of elements in your prompt
+format = """
+$os\
+$username\
+$directory\
+$git_branch\
+$git_status\
+$docker_context\
+$fill\
+$cmd_duration $battery $time
+$character"""
+
+# --- Left Side Modules ---
+
+[os]
+disabled = false
+style = "bold blue"
+
+[os.symbols]
+Arch = "󰣇 "
+Ubuntu = "󰕈 "
+Macos = "󰀵 "
+
+[username]
+show_always = true
+style_user = "bold cyan"
+format = "[$user]($style) "
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold magenta) "
+trim_at = ".local"
 
 [directory]
-truncation_length = 2
+truncation_length = 3
 truncation_symbol = "…/"
-repo_root_style = "bold cyan"
-repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+style = "bold blue"
+read_only = " 󰌾"
 
 [git_branch]
-format = "[$branch]($style) "
-style = "italic cyan"
+symbol = " "
+style = "bold italic pg_green"
 
 [git_status]
-format     = '[$all_status]($style)'
-style      = "cyan"
-ahead      = "⇡${count} "
-diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
-behind     = "⇣${count} "
-conflicted = " "
-up_to_date = " "
-untracked  = "? "
-modified   = " "
-stashed    = ""
-staged     = ""
-renamed    = ""
-deleted    = ""
+style = "bold red"
+format = "([$all_status$ahead_behind]($style) )"
+
+[docker_context]
+symbol = " "
+style = "bold blue"
+format = "via [$symbol$context]($style) "
+
+# --- Right Side Modules (The Fill pushes these to the end) ---
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+min_time = 500
+show_milliseconds = false
+style = "bold yellow"
+format = "took [$duration]($style) "
+
+[battery]
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[time]
+disabled = false
+time_format = "%I:%M %p" # 12-hour format with AM/PM
+style = "dimmed white"
+format = "at [$time]($style)"
+
+# --- The Input Line ---
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vicmd_symbol = "[V](bold yellow)"
