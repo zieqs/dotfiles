@@ -11,7 +11,7 @@ $git_branch\
 $git_status\
 $docker_context\
 $fill\
-$cmd_duration $battery $time
+$cmd_duration $time
 $character"""
 
 # --- Left Side Modules ---
